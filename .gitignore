@@ -11,3 +11,6 @@ infra/**/*.env
 
 # OS
 .DS_Store
+
+# git worktree scratch dir (subagent-driven-development)
+.worktrees/
