@@ -51,7 +51,11 @@ export default function ReviewPage() {
   }
 
   if (!status || status.stage === "processing") {
-    return <p>Classifying feedback...</p>;
+    return (
+      <main>
+        <p>Classifying feedback...</p>
+      </main>
+    );
   }
 
   if (status.stage === "pending_review") {
@@ -81,12 +85,18 @@ export default function ReviewPage() {
   }
 
   if (status.stage === "discarded") {
-    return <p>Classified as spam and discarded automatically. No issue filed.</p>;
+    return (
+      <main>
+        <p>Classified as spam and discarded automatically. No issue filed.</p>
+      </main>
+    );
   }
 
   return (
-    <p>
-      Issue filed: <a href={status.issueUrl}>{status.issueUrl}</a>
-    </p>
+    <main>
+      <p>
+        Issue filed: <a href={status.issueUrl}>{status.issueUrl}</a>
+      </p>
+    </main>
   );
 }
