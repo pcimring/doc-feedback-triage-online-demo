@@ -97,6 +97,22 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.secondary {
+  background: transparent;
+  color: #2563eb;
+  border: 1px solid #c7d2fe;
+}
+
+button.secondary:hover:not(:disabled) {
+  background: #eef2ff;
+}
+
 p[role="alert"] {
   color: #b91c1c;
   background: #fef2f2;

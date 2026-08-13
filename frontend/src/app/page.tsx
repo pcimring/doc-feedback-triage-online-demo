@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { pickRandomSample } from "@/lib/samples";
 
 export default function HomePage() {
   const [page, setPage] = useState("");
@@ -9,6 +10,12 @@ export default function HomePage() {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
+
+  function handleFillSample() {
+    const sample = pickRandomSample();
+    setPage(sample.page);
+    setComment(sample.comment);
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -61,9 +68,14 @@ export default function HomePage() {
           />
         </label>
         {error && <p role="alert">{error}</p>}
-        <button type="submit" disabled={submitting}>
-          {submitting ? "Starting..." : "Submit feedback"}
-        </button>
+        <div className="form-actions">
+          <button type="button" className="secondary" onClick={handleFillSample}>
+            Fill in sample values
+          </button>
+          <button type="submit" disabled={submitting}>
+            {submitting ? "Starting..." : "Submit feedback"}
+          </button>
+        </div>
       </form>
     </main>
   );

@@ -8,6 +8,7 @@ const { pushMock } = vi.hoisted(() => ({ pushMock: vi.fn() }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: pushMock }) }));
 
 import HomePage from "../page";
+import { SAMPLES } from "@/lib/samples";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -48,5 +49,15 @@ describe("HomePage", () => {
 
     expect(await screen.findByRole("alert")).toHaveTextContent(/too many runs/i);
     expect(pushMock).not.toHaveBeenCalled();
+  });
+
+  it("fills page/comment with one of the known samples when 'Fill in sample values' is clicked", () => {
+    render(<HomePage />);
+
+    fireEvent.click(screen.getByRole("button", { name: /fill in sample values/i }));
+
+    const pageValue = (screen.getByLabelText(/page/i) as HTMLInputElement).value;
+    const commentValue = (screen.getByLabelText(/comment/i) as HTMLTextAreaElement).value;
+    expect(SAMPLES).toContainEqual({ page: pageValue, comment: commentValue });
   });
 });
