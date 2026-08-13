@@ -1,0 +1,16 @@
+[Unit]
+Description=doc-feedback-triage job workers (classify-feedback, file-github-issue)
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=docfeedback
+Group=docfeedback
+WorkingDirectory=/opt/doc-feedback-workers
+ExecStart=/usr/bin/java -jar /opt/doc-feedback-workers/app.jar
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
