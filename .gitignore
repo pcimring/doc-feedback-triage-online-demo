@@ -1,0 +1,13 @@
+# Node (frontend/)
+node_modules/
+.next/
+.vercel/
+*.env
+*.env.local
+
+# Infra secrets — never committed
+infra/**/.env
+infra/**/*.env
+
+# OS
+.DS_Store
