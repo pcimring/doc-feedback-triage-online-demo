@@ -2,7 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import type { RunStatus } from "@/lib/status";
+
+function BackToStart() {
+  return (
+    <p className="back-link">
+      <Link href="/">Back to &lsquo;Submit Feedback&rsquo; widget</Link>
+    </p>
+  );
+}
 
 const POLL_INTERVAL_MS = 2000;
 const TERMINAL_STAGES = new Set(["discarded", "filed"]);
@@ -54,6 +63,7 @@ export default function ReviewPage() {
     return (
       <main>
         <p>Classifying feedback...</p>
+        <BackToStart />
       </main>
     );
   }
@@ -77,9 +87,12 @@ export default function ReviewPage() {
             <option value="spam">spam</option>
           </select>
         </label>
-        <button onClick={handleComplete} disabled={completing}>
-          {completing ? "Filing..." : "Confirm and file issue"}
-        </button>
+        <div className="review-actions">
+          <button onClick={handleComplete} disabled={completing}>
+            {completing ? "Filing..." : "Confirm and file issue"}
+          </button>
+        </div>
+        <BackToStart />
       </main>
     );
   }
@@ -88,6 +101,7 @@ export default function ReviewPage() {
     return (
       <main>
         <p>Classified as spam and discarded automatically. No issue filed.</p>
+        <BackToStart />
       </main>
     );
   }
@@ -95,8 +109,12 @@ export default function ReviewPage() {
   return (
     <main>
       <p>
-        Issue filed: <a href={status.issueUrl}>{status.issueUrl}</a>
+        Issue filed:{" "}
+        <a href={status.issueUrl} target="_blank" rel="noreferrer">
+          {status.issueUrl}
+        </a>
       </p>
+      <BackToStart />
     </main>
   );
 }

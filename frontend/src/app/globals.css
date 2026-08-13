@@ -103,6 +103,21 @@ button:disabled {
   align-items: center;
 }
 
+.review-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.back-link {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.back-link a {
+  color: #6b7280;
+}
+
 button.secondary {
   background: transparent;
   color: #2563eb;

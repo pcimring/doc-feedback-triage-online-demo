@@ -57,10 +57,12 @@ describe("ReviewPage", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     render(<ReviewPage />);
-    await waitFor(() => expect(screen.getByRole("link")).toHaveAttribute(
-      "href",
-      "https://github.com/pcimring/docs-feedback-demo/issues/1"
-    ));
+    await waitFor(() =>
+      expect(screen.getByRole("link", { name: /docs-feedback-demo\/issues\/1/ })).toHaveAttribute(
+        "href",
+        "https://github.com/pcimring/docs-feedback-demo/issues/1"
+      )
+    );
 
     const callsAfterFirstLoad = fetchMock.mock.calls.length;
     await vi.advanceTimersByTimeAsync(10000);
