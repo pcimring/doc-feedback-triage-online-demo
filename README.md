@@ -29,9 +29,12 @@ not duplicated here.
 
 ## Running the online demo
 
-<!-- Filled in once the demo is live: what the link is, what happens when you
-     use it, and the current status of the pending Camunda non-commercial
-     license that gates publishing this link anywhere. -->
+The demo is live: **https://doc-feedback-triage-online-demo.vercel.app**
+
+Submit feedback on a (fictional) documentation page and watch it move
+through classification, human review, and — if approved — a real GitHub
+issue filed on the sandbox repo. Rate-limited per IP to keep it usable for
+everyone.
 
 ## Creating your own online demo
 
