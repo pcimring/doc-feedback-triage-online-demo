@@ -13,10 +13,17 @@ export default function AboutModal({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="about-modal-backdrop" data-testid="about-modal-backdrop" onClick={onClose}>
-      <div className="about-modal" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="about-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="about-modal-heading"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button type="button" className="about-modal-close" onClick={onClose} aria-label="Close">
           &times;
         </button>
+        <h2 id="about-modal-heading">About this demo</h2>
         <p>
           This live demo illustrates a simplified, end-to-end BPMN process for handling feedback
           on developer documentation: the kind of process that might run after a reader clicks
@@ -27,12 +34,14 @@ export default function AboutModal({ onClose }: { onClose: () => void }) {
         <p>For more context, as well as the source code, see:</p>
         <ul>
           <li>
+            <strong>GitHub repo:</strong>{" "}
             <a href="https://github.com/pcimring/doc-feedback-triage-agent" target="_blank" rel="noreferrer">
               doc-feedback-triage-agent
             </a>{" "}
-            — the BPMN process, Java workers, and Camunda deployment
+            - the BPMN process, Java workers, and Camunda deployment
           </li>
           <li>
+            <strong>GitHub repo:</strong>{" "}
             <a
               href="https://github.com/pcimring/doc-feedback-triage-online-demo"
               target="_blank"
@@ -40,13 +49,13 @@ export default function AboutModal({ onClose }: { onClose: () => void }) {
             >
               doc-feedback-triage-online-demo
             </a>{" "}
-            — this site&apos;s frontend and infra
+            - this site&apos;s frontend and infra
           </li>
           <li>
             <a href="https://pcimring.github.io" target="_blank" rel="noreferrer">
               Portfolio
             </a>{" "}
-            — more of Peter Cimring&apos;s work with Camunda, BPMN, and AI orchestration
+            - more of Peter Cimring&apos;s work with Camunda, BPMN, and AI orchestration
           </li>
         </ul>
       </div>

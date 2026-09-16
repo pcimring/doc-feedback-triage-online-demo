@@ -50,10 +50,6 @@ export default function HomePage() {
         Submit feedback for a (fictional) page and watch it move through the workflow:
         classification, human review, and, if approved, an actual GitHub issue.
       </p>
-      <button type="button" className="secondary about-trigger" onClick={() => setShowAbout(true)}>
-        About this demo
-      </button>
-      {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
       <form onSubmit={handleSubmit}>
         <label>
           Page
@@ -83,6 +79,13 @@ export default function HomePage() {
           </button>
         </div>
       </form>
+      <hr className="about-divider" />
+      <div className="about-trigger-row">
+        <button type="button" className="secondary about-trigger" onClick={() => setShowAbout(true)}>
+          About this demo
+        </button>
+      </div>
+      {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
     </main>
   );
 }

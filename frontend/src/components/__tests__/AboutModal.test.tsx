@@ -10,6 +10,18 @@ beforeEach(() => {
 });
 
 describe("AboutModal", () => {
+  it("renders an 'About this demo' heading", () => {
+    render(<AboutModal onClose={vi.fn()} />);
+
+    expect(screen.getByRole("heading", { name: /about this demo/i })).toBeInTheDocument();
+  });
+
+  it("labels the two repo links as GitHub repos", () => {
+    render(<AboutModal onClose={vi.fn()} />);
+
+    expect(screen.getAllByText("GitHub repo:")).toHaveLength(2);
+  });
+
   it("renders links to the agent repo, the demo repo, and the portfolio", () => {
     render(<AboutModal onClose={vi.fn()} />);
 
