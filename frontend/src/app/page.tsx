@@ -3,12 +3,14 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { pickRandomSample } from "@/lib/samples";
+import AboutModal from "@/components/AboutModal";
 
 export default function HomePage() {
   const [page, setPage] = useState("");
   const [comment, setComment] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   const router = useRouter();
 
   function handleFillSample() {
@@ -48,6 +50,10 @@ export default function HomePage() {
         Submit feedback for a (fictional) page and watch it move through the workflow:
         classification, human review, and, if approved, an actual GitHub issue.
       </p>
+      <button type="button" className="secondary about-trigger" onClick={() => setShowAbout(true)}>
+        About this demo
+      </button>
+      {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
       <form onSubmit={handleSubmit}>
         <label>
           Page

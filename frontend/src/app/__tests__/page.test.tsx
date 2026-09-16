@@ -60,4 +60,16 @@ describe("HomePage", () => {
     const commentValue = (screen.getByLabelText(/comment/i) as HTMLTextAreaElement).value;
     expect(SAMPLES).toContainEqual({ page: pageValue, comment: commentValue });
   });
+
+  it("opens and closes the about-this-demo modal", () => {
+    render(<HomePage />);
+
+    expect(screen.queryByTestId("about-modal-backdrop")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /about this demo/i }));
+    expect(screen.getByTestId("about-modal-backdrop")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /close/i }));
+    expect(screen.queryByTestId("about-modal-backdrop")).not.toBeInTheDocument();
+  });
 });

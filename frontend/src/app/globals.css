@@ -145,3 +145,58 @@ a {
 strong {
   color: #111;
 }
+
+.about-trigger {
+  margin-bottom: 1.5rem;
+}
+
+.about-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 10;
+}
+
+.about-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 560px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.about-modal p {
+  margin: 0 0 1rem;
+  color: #333;
+}
+
+.about-modal ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.about-modal li {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.about-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: transparent;
+  color: #6b7280;
+  padding: 0.25rem 0.625rem;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.about-modal-close:hover {
+  background: #f3f4f6;
+}

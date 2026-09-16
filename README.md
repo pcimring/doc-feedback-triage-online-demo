@@ -1,5 +1,6 @@
 # doc-feedback-triage: online demo
 
+A live demo of **Camunda 8 orchestrating a BPMN process with AI in the loop**.
 Everything needed to run [`doc-feedback-triage-agent`](https://github.com/pcimring/doc-feedback-triage-agent)
 as a live, publicly reachable demo, so a visitor can trigger a real run and
 act as the human reviewer themselves.
@@ -16,11 +17,11 @@ systems. Two short tutorials if you're new to it:
 
 ## What is this project?
 
-`doc-feedback-triage-agent` is a small, complete example of a common
-automation pattern: an LLM makes a judgment call that doesn't need to be
-perfect, a human stays in the loop before anything external happens, and a
-workflow engine (Camunda 8) sequences the two. See that repo's own README for
-the full process walkthrough and architecture.
+`doc-feedback-triage-agent` shows Camunda 8 orchestrating a BPMN process end
+to end: an LLM makes a judgment call that doesn't need to be perfect, a human
+stays in the loop before anything external happens, and Camunda sequences the
+two, from classification through review to a filed GitHub issue. See that
+repo's own README for the full process walkthrough and architecture.
 
 ## Local deployment
 
