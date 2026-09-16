@@ -1,50 +1,64 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-const { limitMock, slidingWindowMock } = vi.hoisted(() => {
+const { incrMock, expireMock } = vi.hoisted(() => {
   return {
-    limitMock: vi.fn(),
-    slidingWindowMock: vi.fn().mockReturnValue("SLIDING_WINDOW_CONFIG"),
+    incrMock: vi.fn(),
+    expireMock: vi.fn(),
   };
 });
 
-vi.mock("@upstash/ratelimit", () => {
+vi.mock("ioredis", () => {
   return {
-    Ratelimit: Object.assign(
-      vi.fn().mockImplementation(() => ({ limit: limitMock })),
-      { slidingWindow: slidingWindowMock }
-    ),
+    default: vi.fn().mockImplementation(() => ({
+      incr: incrMock,
+      expire: expireMock,
+    })),
   };
 });
-vi.mock("@upstash/redis", () => ({
-  Redis: { fromEnv: vi.fn().mockReturnValue("FAKE_REDIS_CLIENT") },
-}));
+
+process.env.REDIS_URL = "redis://:password@example.com:6379";
 
 import { createRateLimiter } from "../ratelimit";
-import { Ratelimit } from "@upstash/ratelimit";
 
 beforeEach(() => {
   vi.clearAllMocks();
 });
 
 describe("createRateLimiter", () => {
-  it("configures a sliding window limiter with the given prefix/limit/window", () => {
-    createRateLimiter("runs:create", 5, "10 m");
+  it("allows requests at or under the limit", async () => {
+    incrMock.mockResolvedValue(5);
+    const limiter = createRateLimiter("runs:create", 5, "10 m");
 
-    expect(slidingWindowMock).toHaveBeenCalledWith(5, "10 m");
-    expect(Ratelimit).toHaveBeenCalledWith({
-      redis: "FAKE_REDIS_CLIENT",
-      limiter: "SLIDING_WINDOW_CONFIG",
-      prefix: "runs:create",
-    });
+    const result = await limiter.check("1.2.3.4");
+
+    expect(result).toBe(true);
+    expect(incrMock).toHaveBeenCalledWith("runs:create:1.2.3.4");
   });
 
-  it("check() returns the underlying limiter's success value", async () => {
-    limitMock.mockResolvedValue({ success: false });
+  it("rejects requests over the limit", async () => {
+    incrMock.mockResolvedValue(6);
     const limiter = createRateLimiter("runs:create", 5, "10 m");
 
     const result = await limiter.check("1.2.3.4");
 
     expect(result).toBe(false);
-    expect(limitMock).toHaveBeenCalledWith("1.2.3.4");
+  });
+
+  it("sets the window expiry only on the first request in a window", async () => {
+    incrMock.mockResolvedValueOnce(1);
+    const limiter = createRateLimiter("runs:create", 5, "10 m");
+
+    await limiter.check("1.2.3.4");
+
+    expect(expireMock).toHaveBeenCalledWith("runs:create:1.2.3.4", 600);
+  });
+
+  it("does not reset expiry on subsequent requests in the same window", async () => {
+    incrMock.mockResolvedValueOnce(2);
+    const limiter = createRateLimiter("runs:create", 5, "10 m");
+
+    await limiter.check("1.2.3.4");
+
+    expect(expireMock).not.toHaveBeenCalled();
   });
 });

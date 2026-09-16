@@ -15,3 +15,5 @@ infra/**/*.env
 
 # git worktree scratch dir (subagent-driven-development)
 .worktrees/
+.vercel
+.env*
