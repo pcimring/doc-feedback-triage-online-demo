@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "doc-feedback-triage: live demo",
+  title: "Doc Feedback Triage using Camunda - Live Demo",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
