@@ -43,10 +43,10 @@ export default function HomePage() {
 
   return (
     <main>
-      <h1>doc-feedback-triage: live demo</h1>
+      <h1>Doc Feedback Triage using Camunda - Live Demo</h1>
       <p>
-        Submit feedback on a (fictional) documentation page and watch it move through
-        classification, human review, and, if approved, a real filed GitHub issue.
+        Submit feedback for a (fictional) page and watch it move through the workflow:
+        classification, human review, and, if approved, an actual GitHub issue.
       </p>
       <form onSubmit={handleSubmit}>
         <label>
