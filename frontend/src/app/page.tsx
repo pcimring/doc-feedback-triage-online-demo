@@ -78,19 +78,20 @@ export default function HomePage() {
             {submitting ? "Starting..." : "Submit feedback"}
           </button>
         </div>
+
+        <hr className="about-divider" />
+        <div className="about-trigger-row">
+          <button
+            type="button"
+            className="secondary about-trigger"
+            aria-expanded={showAbout}
+            onClick={() => setShowAbout((value) => !value)}
+          >
+            About this demo
+          </button>
+        </div>
+        {showAbout && <AboutPanel />}
       </form>
-      <hr className="about-divider" />
-      <div className="about-trigger-row">
-        <button
-          type="button"
-          className="secondary about-trigger"
-          aria-expanded={showAbout}
-          onClick={() => setShowAbout((value) => !value)}
-        >
-          About this demo
-        </button>
-      </div>
-      {showAbout && <AboutPanel />}
     </main>
   );
 }
