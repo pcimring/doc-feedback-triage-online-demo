@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { pickRandomSample } from "@/lib/samples";
-import AboutModal from "@/components/AboutModal";
+import AboutPanel from "@/components/AboutPanel";
 
 export default function HomePage() {
   const [page, setPage] = useState("");
@@ -81,11 +81,16 @@ export default function HomePage() {
       </form>
       <hr className="about-divider" />
       <div className="about-trigger-row">
-        <button type="button" className="secondary about-trigger" onClick={() => setShowAbout(true)}>
+        <button
+          type="button"
+          className="secondary about-trigger"
+          aria-expanded={showAbout}
+          onClick={() => setShowAbout((value) => !value)}
+        >
           About this demo
         </button>
       </div>
-      {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
+      {showAbout && <AboutPanel />}
     </main>
   );
 }
