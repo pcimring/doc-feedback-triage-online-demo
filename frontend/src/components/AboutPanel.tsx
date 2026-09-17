@@ -8,7 +8,12 @@ export default function AboutPanel() {
         classifies the feedback, a human reviewer confirms or overrides that classification,
         and a Java worker files a real GitHub issue once approved.
       </p>
-      <p>For more context, as well as the source code, see:</p>
+      <p>
+        (Since this demo runs on a free-tier Oracle Cloud instance, we chose to conserve
+        resources and run the backend via Docker Compose. In a real-world implementation,
+        Kubernetes would be preferred.)
+      </p>
+      <p>For more context, including a BPMN workflow diagram and source code, see:</p>
       <ul>
         <li>
           <strong>GitHub repo:</strong>{" "}

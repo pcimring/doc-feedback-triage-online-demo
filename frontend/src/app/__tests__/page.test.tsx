@@ -64,13 +64,13 @@ describe("HomePage", () => {
   it("toggles the about-this-demo panel inline, below the form", () => {
     render(<HomePage />);
 
-    expect(screen.queryByText(/for more context, as well as the source code/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/for more context, including a bpmn workflow diagram/i)).not.toBeInTheDocument();
 
     const aboutButton = screen.getByRole("button", { name: /about this demo/i });
     fireEvent.click(aboutButton);
-    expect(screen.getByText(/for more context, as well as the source code/i)).toBeInTheDocument();
+    expect(screen.getByText(/for more context, including a bpmn workflow diagram/i)).toBeInTheDocument();
 
     fireEvent.click(aboutButton);
-    expect(screen.queryByText(/for more context, as well as the source code/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/for more context, including a bpmn workflow diagram/i)).not.toBeInTheDocument();
   });
 });

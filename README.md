@@ -37,6 +37,10 @@ through classification, human review, and, if approved, a real GitHub
 issue filed on the sandbox repo. Rate-limited per IP to keep it usable for
 everyone.
 
+(Since this demo runs on a free-tier Oracle Cloud instance, we chose to
+conserve resources and run the backend via Docker Compose. In a real-world
+implementation, Kubernetes would be preferred.)
+
 ## Creating your own online demo
 
 <!-- Filled in by infra Task 8: the actual runbook - VM, Camunda, Cloudflare

@@ -6,6 +6,13 @@ import "@testing-library/jest-dom/vitest";
 import AboutPanel from "../AboutPanel";
 
 describe("AboutPanel", () => {
+  it("mentions Docker Compose was chosen over Kubernetes for this free-tier demo", () => {
+    render(<AboutPanel />);
+
+    expect(screen.getByText(/docker compose/i)).toBeInTheDocument();
+    expect(screen.getByText(/kubernetes/i)).toBeInTheDocument();
+  });
+
   it("labels the two repo links as GitHub repos", () => {
     render(<AboutPanel />);
 
